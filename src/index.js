@@ -37,10 +37,10 @@ class EraWidget {
       case 'configuration':
         this.triggerCallbacks(this.onConfigurationCallbacks, data);
         break;
-      case 'configValues':
+      case 'values':
         this.triggerCallbacks(this.onValuesCallbacks, data);
         break
-      case 'chartData':
+      case 'histories':
         this.triggerCallbacks(this.onHistoriesCallbacks, data);
         break
     }
