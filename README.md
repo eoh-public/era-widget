@@ -10,9 +10,9 @@ yarn add @eohjsc/era-widget
 ```
 ## Usage
 ```javascript
-import ERaWidget from '@eohjsc/era-widget';
+import EraWidget from '@eohjsc/era-widget';
 
-const eraWidget = new ERaWidget();
+const eraWidget = new EraWidget();
 
 eraWidget.onConfiguration((configuration) => {
   console.log('configuration', configuration);
