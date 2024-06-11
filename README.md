@@ -8,6 +8,9 @@ npm install @eohjsc/era-widget
 ```bash
 yarn add @eohjsc/era-widget
 ```
+```html
+<script src="https://www.unpkg.com/@eohjsc/era-widget@1.0.9/src/index.js"></script>
+```
 ## Usage
 ```javascript
 import EraWidget from '@eohjsc/era-widget';
