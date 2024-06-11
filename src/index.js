@@ -55,10 +55,10 @@ class EraWidget {
       case 'configuration':
         this.onConfigurationCallbacks.push(callback);
         break;
-      case 'configValues':
+      case 'values':
         this.onValuesCallbacks.push(callback);
         break;
-      case 'configHistory':
+      case 'histories':
         this.onHistoriesCallbacks.push(callback);
         break;
     }
