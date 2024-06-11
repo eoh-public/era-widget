@@ -121,5 +121,9 @@ class EraWidget {
     this.postMessage('ready');
   }
 }
-
-export default EraWidget;
+try {
+  module.exports = EraWidget;
+}
+catch (e) {
+  window.EraWidget = EraWidget;
+}
