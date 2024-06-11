@@ -1,6 +1,6 @@
 {
   "name": "@eohjsc/era-widget",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -12,5 +12,8 @@
     "widget"
   ],
   "author": "EOH JSC",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "minify": "^11.2.0"
+  }
 }
