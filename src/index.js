@@ -109,6 +109,11 @@ class EraWidget {
   }
 
   postMessage(type, data) {
+    if (window?.ReactNativeWebView?.postMessage) {
+      window.ReactNativeWebView.postMessage(JSON.stringify(data));
+      return;
+    }
+
     window.parent.postMessage({
       source: 'eraIframeWidget',
       type,
