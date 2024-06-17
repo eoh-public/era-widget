@@ -109,17 +109,18 @@ class EraWidget {
   }
 
   postMessage(type, data) {
-    if (window?.ReactNativeWebView?.postMessage) {
-      window.ReactNativeWebView.postMessage(JSON.stringify(data));
-      return;
-    }
-
-    window.parent.postMessage({
+    const message = {
       source: 'eraIframeWidget',
       type,
       data,
       eraWidgetId: this.eraWidgetId,
-    }, this.eraOrigin);
+    }
+
+    if (window.parent !== window) {
+      window.parent.postMessage(message, this.eraOrigin);
+      return;
+    }
+    window.ReactNativeWebView.postMessage(JSON.stringify(message));
   }
 
   ready() {
