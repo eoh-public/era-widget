@@ -26,7 +26,8 @@ class EraWidget {
   }
 
   handleMessage(event) {
-    if (event.origin !== this.eraOrigin) {
+    // iframe and webview
+    if (event.origin !== this.eraOrigin && event.origin !== window.location.origin) {
       return;
     }
     if (event.data?.source !== 'eraIframeWidget') {
