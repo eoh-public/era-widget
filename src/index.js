@@ -127,6 +127,10 @@ class EraWidget {
   ready() {
     this.postMessage('ready');
   }
+
+  requestAdjustMobileHeight(height) {
+    this.postMessage('requestAdjustMobileHeight', height);
+  }
 }
 try {
   module.exports = EraWidget;
