@@ -49,8 +49,8 @@ eraWidget.requestHistories(startTime, endTime);
 | requestHistories(start: datetime, end:datetime) | Request histories               |
 
 ## Events
-| Name          | Description           | Example                                                                                      |
-|---------------|-----------------------|----------------------------------------------------------------------------------------------|
-| configuration | widget configuration  | ```{url, realtime_configs : [ { name, color, sensor_id, chip_id, id } ], history_configs}``` |
-| values        | realtime config value | ```{ 1 : {value: 2} }```                                                                     |
-| histories     | history data          | ```[{data: [], name, color, sensor_id, chip_id, id }]```                                     |
+| Name          | Description           | Example                                                                                                                                   |
+|---------------|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| configuration | widget configuration  | ```{url, realtime_configs : [ { name, color, sensor_id, chip_id, id } ], history_configs: [ { name, color, sensor_id, chip_id, id } ]}``` |
+| values        | realtime config value | ```{ 1 : {value: 2} }```                                                                                                                  |
+| histories     | history data          | ```[{data: [{x, y}], name, color, sensor_id, chip_id, id }]```                                                                            |
