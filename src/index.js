@@ -7,15 +7,21 @@ const ALLOW_ORIGINS = [
 ];
 
 class EraWidget {
-  constructor(origins = null) {
-    this.origins = origins || ALLOW_ORIGINS;
+  constructor({origins = ALLOW_ORIGINS, onConfiguration, onValues, onHistories, ready=true, mobileHeight = null}) {
+    this.origins = origins;
     this.urlParams = new URLSearchParams(window.location.search);
     this.eraOrigin = this.urlParams.get('eraOrigin');
     this.eraWidgetId = parseInt(this.urlParams.get('eraWidget'), 10);
-    this.onConfigurationCallbacks = [];
-    this.onValuesCallbacks = [];
-    this.onHistoriesCallbacks = [];
+    this.onConfiguration = [onConfiguration];
+    this.onValues = [onValues];
+    this.onHistories = [onHistories];
     this.init();
+    if (ready) {
+      this.ready()
+    }
+    if (mobileHeight) {
+      this.requestAdjustMobileHeight(mobileHeight)
+    }
   }
 
   init() {
@@ -36,13 +42,13 @@ class EraWidget {
     const {type, data} = event.data;
     switch (type) {
       case 'configuration':
-        this.triggerCallbacks(this.onConfigurationCallbacks, data);
+        this.triggerCallbacks(this.onConfiguration, data);
         break;
       case 'values':
-        this.triggerCallbacks(this.onValuesCallbacks, data);
+        this.triggerCallbacks(this.onValues, data);
         break
       case 'histories':
-        this.triggerCallbacks(this.onHistoriesCallbacks, data);
+        this.triggerCallbacks(this.onHistories, data);
         break
     }
   }
@@ -54,13 +60,13 @@ class EraWidget {
   on(event, callback) {
     switch (event) {
       case 'configuration':
-        this.onConfigurationCallbacks.push(callback);
+        this.onConfiguration.push(callback);
         break;
       case 'values':
-        this.onValuesCallbacks.push(callback);
+        this.onValues.push(callback);
         break;
       case 'histories':
-        this.onHistoriesCallbacks.push(callback);
+        this.onHistories.push(callback);
         break;
     }
   }
@@ -68,38 +74,15 @@ class EraWidget {
   off(event, callback) {
     switch (event) {
       case 'configuration':
-        this.onConfigurationCallbacks = this.onConfigurationCallbacks.filter(cb => cb !== callback);
+        this.onConfiguration = this.onConfiguration.filter(cb => cb !== callback);
         break;
       case 'values':
-        this.onValuesCallbacks = this.onValuesCallbacks.filter(cb => cb !== callback);
+        this.onValues = this.onValues.filter(cb => cb !== callback);
         break;
       case 'histories':
-        this.onHistoriesCallbacks = this.onHistoriesCallbacks.filter(cb => cb !== callback);
+        this.onHistories = this.onHistories.filter(cb => cb !== callback);
         break;
     }
-  }
-
-  onConfiguration(callback) {
-    this.on('configuration', callback);
-  }
-
-  onValues(callback) {
-    this.on('values', callback);
-  }
-
-  onHistories(callback) {
-    this.on('histories', callback);
-  }
-  offConfiguration(callback) {
-    this.off('configuration', callback);
-  }
-
-  offValues(callback) {
-    this.off('values', callback);
-  }
-
-  offHistories(callback) {
-    this.off('histories', callback);
   }
 
   requestHistories(startTime, endTime) {
