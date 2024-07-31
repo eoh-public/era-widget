@@ -2,7 +2,7 @@
   "name": "@eohjsc/era-widget",
   "homepage": "https://github.com/eoh-public/era-widget",
   "repository": "eoh-public/era-widget",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "",
   "main": "src/index.js",
   "scripts": {
