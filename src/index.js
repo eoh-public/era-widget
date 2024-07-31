@@ -7,7 +7,20 @@ const ALLOW_ORIGINS = [
 ];
 
 class EraWidget {
-  constructor({origins = ALLOW_ORIGINS, onConfiguration, onValues, onHistories, ready=true, mobileHeight = null}) {
+  constructor({
+                origins = ALLOW_ORIGINS,
+                onConfiguration,
+                onValues,
+                onHistories,
+                ready = true,
+                mobileHeight = null,
+                maxRealtimeConfigsCount = 0,
+                maxHistoryConfigsCount = 0,
+                maxActionsCount = 0,
+                minRealtimeConfigsCount = 0,
+                minHistoryConfigsCount = 0,
+                minActionsCount = 0,
+              }) {
     this.origins = origins;
     this.urlParams = new URLSearchParams(window.location.search);
     this.eraOrigin = this.urlParams.get('eraOrigin');
@@ -15,6 +28,12 @@ class EraWidget {
     this.onConfiguration = [onConfiguration];
     this.onValues = [onValues];
     this.onHistories = [onHistories];
+    this.maxRealtimeConfigsCount = maxRealtimeConfigsCount;
+    this.maxHistoryConfigsCount = maxHistoryConfigsCount;
+    this.maxActionsCount = maxActionsCount;
+    this.minRealtimeConfigsCount = minRealtimeConfigsCount;
+    this.minHistoryConfigsCount = minHistoryConfigsCount;
+    this.minActionsCount = minActionsCount;
     this.init();
     if (ready) {
       this.ready()
@@ -28,7 +47,7 @@ class EraWidget {
     if (!this.origins.includes(this.eraOrigin)) {
       throw new Error('Invalid eraOrigin')
     }
-    window.addEventListener('message',  this.handleMessage.bind(this));
+    window.addEventListener('message', this.handleMessage.bind(this));
   }
 
   handleMessage(event) {
@@ -108,16 +127,23 @@ class EraWidget {
   }
 
   ready() {
-    this.postMessage('ready');
+    this.postMessage('ready', {
+      maxRealtimeConfigsCount: this.maxRealtimeConfigsCount,
+      maxHistoryConfigsCount: this.maxHistoryConfigsCount,
+      maxActionsCount: this.maxActionsCount,
+      minRealtimeConfigsCount: this.minRealtimeConfigsCount,
+      minHistoryConfigsCount: this.minHistoryConfigsCount,
+      minActionsCount: this.minActionsCount,
+    });
   }
 
   requestAdjustMobileHeight(height) {
     this.postMessage('requestAdjustMobileHeight', height);
   }
 }
+
 try {
   module.exports = EraWidget;
-}
-catch (e) {
+} catch (e) {
   window.EraWidget = EraWidget;
 }

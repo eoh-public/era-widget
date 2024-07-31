@@ -29,7 +29,7 @@ const eraWidget = new EraWidget({
 });
 
 
-# call when need to request history
+// call when need to request history
 eraWidget.requestHistories(startTime, endTime);
 ```
 ## Options
