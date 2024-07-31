@@ -14,6 +14,9 @@ class EraWidget {
                 onHistories,
                 ready = true,
                 mobileHeight = null,
+                needRealtimeConfigs = true,
+                needHistoryConfigs = true,
+                needActions = true,
                 maxRealtimeConfigsCount = 0,
                 maxHistoryConfigsCount = 0,
                 maxActionsCount = 0,
@@ -34,6 +37,9 @@ class EraWidget {
     this.minRealtimeConfigsCount = minRealtimeConfigsCount;
     this.minHistoryConfigsCount = minHistoryConfigsCount;
     this.minActionsCount = minActionsCount;
+    this.needRealtimeConfigs = needRealtimeConfigs;
+    this.needHistoryConfigs = needHistoryConfigs;
+    this.needActions = needActions;
     this.init();
     if (ready) {
       this.ready()
@@ -128,6 +134,9 @@ class EraWidget {
 
   ready() {
     this.postMessage('ready', {
+      needRealtimeConfigs: this.needRealtimeConfigs,
+      needHistoryConfigs: this.needHistoryConfigs,
+      needActions: this.needActions,
       maxRealtimeConfigsCount: this.maxRealtimeConfigsCount,
       maxHistoryConfigsCount: this.maxHistoryConfigsCount,
       maxActionsCount: this.maxActionsCount,
