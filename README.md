@@ -33,20 +33,30 @@ eraWidget.init({
 eraWidget.requestHistories(startTime, endTime);
 ```
 ## Options
-| Name            | Type     | Default | Description                                      |
-|-----------------|----------|---------|--------------------------------------------------|
-| onConfiguration | Function | null    | Callback function when configuration is received |
-| onHistory       | Function | null    | Callback function when history is received       |
-| onValues        | Function | null    | Callback function when values are received       |
-| ready           | boolean  | true    | Auto send ready message after initializing       |
-| mobileHeight    | number   | 300     | Height of widget on mobile                       |
+| Name                    | Type     | Default | Description                                         |
+|-------------------------|----------|---------|-----------------------------------------------------|
+| onConfiguration         | Function | null    | Callback function when configuration is received    |
+| onHistory               | Function | null    | Callback function when history is received          |
+| onValues                | Function | null    | Callback function when values are received          |
+| ready                   | boolean  | true    | Auto send ready message after initializing          |
+| mobileHeight            | number   | 300     | Height of widget on mobile                          |
+| needRealtimeConfigs     | boolean  | true    | Need realtime configs                               |
+| needHistoryConfigs      | boolean  | true    | Need history configs                                |
+| needActions             | boolean  | true    | Need actions                                        |
+| maxRealtimeConfigsCount | number   | 0       | Maximum number of realtime configs (0 is unlimited) |
+| maxHistoryConfigsCount  | number   | 0       | Maximum number of history configs (0 is unlimited)  |
+| maxActionsCount         | number   | 0       | Maximum number of actions (0 is unlimited)          |
+| minRealtimeConfigsCount | number   | 0       | Minimum number of realtime configs                  |
+| minHistoryConfigsCount  | number   | 0       | Minimum number of history configs                   |
+| minActionsCount         | number   | 0       | Minimum number of actions                           |
 
 ## Methods
-| Name                                            | Description                     |
-|-------------------------------------------------|---------------------------------|
-| requestAdjustMobileHeight(height: integer)      | Request to adjust mobile height |
-| ready()                                         | Send ready message              |
-| requestHistories(start: datetime, end:datetime) | Request histories               |
+| Name                                                                | Description                     |
+|---------------------------------------------------------------------|---------------------------------|
+| requestAdjustMobileHeight(height: integer)                          | Request to adjust mobile height |
+| ready()                                                             | Send ready message              |
+| requestHistories(start: datetime, end:datetime)                     | Request histories               |
+| triggerAction(actionKey: uuid4, actionIndex: integer, data: object) | Trigger action                  |
 
 ## Events
 | Name          | Description           | Example                                                                                                                                   |
