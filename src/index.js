@@ -7,23 +7,26 @@ const ALLOW_ORIGINS = [
 ];
 
 class EraWidget {
-  constructor({
-                origins = ALLOW_ORIGINS,
-                onConfiguration,
-                onValues,
-                onHistories,
-                ready = true,
-                mobileHeight = null,
-                needRealtimeConfigs = true,
-                needHistoryConfigs = true,
-                needActions = true,
-                maxRealtimeConfigsCount = 0,
-                maxHistoryConfigsCount = 0,
-                maxActionsCount = 0,
-                minRealtimeConfigsCount = 0,
-                minHistoryConfigsCount = 0,
-                minActionsCount = 0,
-              }) {
+  constructor() {
+  }
+
+  init({
+      origins = ALLOW_ORIGINS,
+      onConfiguration,
+      onValues,
+      onHistories,
+      ready = true,
+      mobileHeight = null,
+      needRealtimeConfigs = true,
+      needHistoryConfigs = true,
+      needActions = true,
+      maxRealtimeConfigsCount = 0,
+      maxHistoryConfigsCount = 0,
+      maxActionsCount = 0,
+      minRealtimeConfigsCount = 0,
+      minHistoryConfigsCount = 0,
+      minActionsCount = 0,
+    }) {
     this.origins = origins;
     this.urlParams = new URLSearchParams(window.location.search);
     this.eraOrigin = this.urlParams.get('eraOrigin');
@@ -40,20 +43,18 @@ class EraWidget {
     this.needRealtimeConfigs = needRealtimeConfigs;
     this.needHistoryConfigs = needHistoryConfigs;
     this.needActions = needActions;
-    this.init();
+
+    if (!this.origins.includes(this.eraOrigin)) {
+      throw new Error('Invalid eraOrigin')
+    }
+    window.addEventListener('message', this.handleMessage.bind(this));
+
     if (ready) {
       this.ready()
     }
     if (mobileHeight) {
       this.requestAdjustMobileHeight(mobileHeight)
     }
-  }
-
-  init() {
-    if (!this.origins.includes(this.eraOrigin)) {
-      throw new Error('Invalid eraOrigin')
-    }
-    window.addEventListener('message', this.handleMessage.bind(this));
   }
 
   handleMessage(event) {
@@ -149,10 +150,14 @@ class EraWidget {
   requestAdjustMobileHeight(height) {
     this.postMessage('requestAdjustMobileHeight', height);
   }
+
+  triggerAction(actionKey, actionIndex, data) {
+    this.postMessage('triggerAction', {actionKey, actionIndex, data});
+  }
 }
 
 try {
-  module.exports = EraWidget;
+  module.exports = new EraWidget();
 } catch (e) {
-  window.EraWidget = EraWidget;
+  window.eraWidget = new EraWidget();
 }
