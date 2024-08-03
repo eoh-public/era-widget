@@ -151,8 +151,8 @@ class EraWidget {
     this.postMessage('requestAdjustMobileHeight', height);
   }
 
-  triggerAction(actionKey, actionIndex, data) {
-    this.postMessage('triggerAction', {actionKey, actionIndex, data});
+  triggerAction(actionKey, actionIndex, data, silent=false) {
+    this.postMessage('triggerAction', {actionKey, actionIndex, data, silent});
   }
 }
 
