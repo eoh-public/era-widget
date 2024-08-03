@@ -45,7 +45,8 @@ class EraWidget {
     this.needActions = needActions;
 
     if (!this.origins.includes(this.eraOrigin)) {
-      throw new Error('Invalid eraOrigin')
+      console.error('Invalid eraOrigin');
+      return;
     }
     window.addEventListener('message', this.handleMessage.bind(this));
 
