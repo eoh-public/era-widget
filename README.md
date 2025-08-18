@@ -20,7 +20,7 @@ eraWidget.init({
   onConfiguration: (configuration) => {
     console.log('configuration', configuration);
   },
-  onHistory: (history) => {
+  onHistories: (histories) => {
     console.log('history', history);
   },
   onValues: (values) => {
@@ -36,7 +36,7 @@ eraWidget.requestHistories(startTime, endTime);
 | Name                    | Type     | Default | Description                                         |
 |-------------------------|----------|---------|-----------------------------------------------------|
 | onConfiguration         | Function | null    | Callback function when configuration is received    |
-| onHistory               | Function | null    | Callback function when history is received          |
+| onHistories             | Function | null    | Callback function when history is received          |
 | onValues                | Function | null    | Callback function when values are received          |
 | ready                   | boolean  | true    | Auto send ready message after initializing          |
 | mobileHeight            | number   | 300     | Height of widget on mobile                          |
@@ -57,6 +57,7 @@ eraWidget.requestHistories(startTime, endTime);
 | ready()                                                             | Send ready message              |
 | requestHistories(start: datetime, end:datetime)                     | Request histories               |
 | triggerAction(actionKey: uuid4, actionIndex: integer, data: object) | Trigger action                  |
+| exitFullScreen()                                                    | Exit full screen mode           |
 
 ## Events
 | Name          | Description           | Example                                                                                                                                   |

@@ -119,6 +119,10 @@ class EraWidget {
     ]);
   }
 
+  exitFullScreen() {
+    this.postMessage('exitFullScreen');
+  }
+
   postMessage(type, data) {
     const message = {
       source: 'eraIframeWidget',
