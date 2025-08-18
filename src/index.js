@@ -87,6 +87,7 @@ class EraWidget {
   on(event, callback) {
     switch (event) {
       case 'configuration':
+        this.configuration = event?.data;
         this.onConfiguration.push(callback);
         break;
       case 'values':
